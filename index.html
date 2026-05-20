@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover, orientation=portrait">
+  <title>Exploration • Una historia de Coraline para Arly</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: radial-gradient(ellipse at center, #0b0f1c 0%, #1a1a2e 100%);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 12px;
+      margin: 0;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ========== NIEBLA DE FONDO ========== */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg, rgba(255,255,240,0.02) 0px, rgba(255,255,240,0.02) 2px, transparent 2px, transparent 8px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========== GATO FANTASMAL (animación aleatoria) ========== */
+    .ghost-cat {
+      position: fixed;
+      bottom: 15%;
+      left: -100px;
+      font-size: 3.5rem;
+      opacity: 0;
+      z-index: 5;
+      pointer-events: none;
+      animation: catWalk 18s infinite linear;
+      filter: drop-shadow(0 0 10px #6a0dad);
+    }
+    @keyframes catWalk {
+      0% { left: -100px; opacity: 0; }
+      5% { opacity: 0.7; }
+      95% { opacity: 0.7; }
+      100% { left: 110%; opacity: 0; }
+    }
+
+    /* ========== BOTONES FLOTANTES ========== */
+    .floating-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .floating-button {
+      position: absolute;
+      bottom: -40px;
+      font-size: 1.5rem;
+      opacity: 0;
+      animation: floatButton 12s infinite;
+      color: #e6b422;
+      text-shadow: 0 0 8px #ffb347;
+    }
+    .floating-button::before {
+      content: "🪡"; /* Aguja e hilo */
+      font-size: 0.8rem;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @keyframes floatButton {
+      0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+      10% { opacity: 0.8; }
+      80% { opacity: 0.3; }
+      100% { transform: translateY(-110vh) rotate(360deg) scale(1.2); opacity: 0; }
+    }
+    /* Posiciones variadas */
+    .btn1 { left: 10%; animation-delay: 0s; }
+    .btn2 { left: 25%; animation-delay: 2.5s; }
+    .btn3 { left: 40%; animation-delay: 5s; }
+    .btn4 { left: 55%; animation-delay: 7.5s; }
+    .btn5 { left: 70%; animation-delay: 3.8s; }
+    .btn6 { left: 85%; animation-delay: 1.2s; }
+    .btn7 { left: 15%; animation-delay: 6.3s; }
+    .btn8 { left: 50%; animation-delay: 8.7s; }
+
+    /* ========== TARJETA PRINCIPAL (LIBRO) ========== */
+    .storybook {
+      background: #1c1b26;
+      border: 3px solid #5a3a5a;
+      border-radius: 28px;
+      width: 100%;
+      max-width: 500px;
+      padding: 20px 18px 24px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(106,13,173,0.3);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Marco de botones dorados */
+    .storybook::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      border: 1px dashed #e6b422;
+      border-radius: 20px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+    .title {
+      color: #e6b422;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 8px #b36b1e;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .title span {
+      font-size: 1.4rem;
+    }
+
+    /* Área de la historia */
+    .story-panel {
+      background: rgba(0,0,0,0.6);
+      border-radius: 20px;
+      padding: 24px 16px;
+      min-height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border: 1px solid #5a3a5a;
+      position: relative;
+      backdrop-filter: blur(2px);
+      box-shadow: inset 0 0 20px #000;
+    }
+    .story-text {
+      font-size: 1.3rem;
+      color: #f0d9b5;
+      line-height: 1.6;
+      font-family: 'Georgia', serif;
+      text-shadow: 0 0 6px #4a2c2c;
+      transition: opacity 0.8s ease;
+    }
+    .story-text.fade-in {
+      animation: reveal 0.9s ease-out;
+    }
+    @keyframes reveal {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Subtítulos de la canción */
+    .subtitle-panel {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #b8a9c9;
+      font-style: italic;
+      padding: 8px;
+      border-top: 1px solid #5a3a5a;
+      letter-spacing: 0.5px;
+      min-height: 30px;
+    }
+
+    /* Control de audio y botón */
+    .audio-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    button {
+      background: #6a0dad;
+      border: none;
+      color: #ffe5b4;
+      font-weight: bold;
+      padding: 12px 24px;
+      border-radius: 40px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(106,13,173,0.5);
+      border: 1px solid #e6b422;
+    }
+    button:hover {
+      background: #7f1fbf;
+      transform: translateY(-2px);
+    }
+    .time-display {
+      color: #a0b9ce;
+      font-size: 0.8rem;
+      font-family: monospace;
+    }
+    .hidden-player {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      position: absolute;
+    }
+    .footer-note {
+      color: #8aa0b5;
+      text-align: center;
+      font-size: 0.75rem;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Gato negro espectral -->
+<div class="ghost-cat">🐈‍⬛</div>
+
+<!-- Botones flotantes -->
+<div class="floating-container">
+  <div class="floating-button btn1">🔘</div>
+  <div class="floating-button btn2">🔘</div>
+  <div class="floating-button btn3">🔘</div>
+  <div class="floating-button btn4">🔘</div>
+  <div class="floating-button btn5">🔘</div>
+  <div class="floating-button btn6">🔘</div>
+  <div class="floating-button btn7">🔘</div>
+  <div class="floating-button btn8">🔘</div>
+</div>
+
+<!-- Libro de historia -->
+<div class="storybook">
+  <div class="title">
+    <span>🗝️</span> EL OTRO MUNDO <span>🪡</span>
+  </div>
+
+  <!-- Panel donde se cuenta la historia -->
+  <div class="story-panel" id="storyContainer">
+    <div class="story-text" id="storyText">Presiona play para comenzar la historia...</div>
+  </div>
+
+  <!-- Subtítulos de la canción -->
+  <div class="subtitle-panel" id="subtitleContainer">
+    <span id="subtitleText">🎵</span>
+  </div>
+
+  <!-- Controles -->
+  <div class="audio-controls">
+    <button id="playButton">▶️ Abrir la puerta</button>
+    <span class="time-display" id="timeDisplay">00:00</span>
+  </div>
+  <div class="footer-note">
+    Para Arly, con magia y valentía 🖤
+  </div>
+</div>
+
+<!-- Reproductor oculto de YouTube (solo audio) -->
+<div class="hidden-player" id="player"></div>
+
+<script>
+  // ========== CONFIGURACIÓN ==========
+  const YOUTUBE_VIDEO_ID = 'T8VVhuuaNNo'; // Exploration de Coraline
+
+  // Línea de tiempo combinada: [tiempo, tipo, texto]
+  // tipo: 'subtitle' = letra de la canción, 'story' = frase de la historia, 'message' = mensaje para Arly
+  const timeline = [
+    // -- Inicio instrumental --
+    { time: 0.5, type: 'subtitle', text: "(Instrumental)" },
+    
+    // -- Primer verso --
+    { time: 20.0, type: 'subtitle', text: "Suli au len" },
+    { time: 24.5, type: 'subtitle', text: "Le je le fanilé jenti" },
+    { time: 28.5, type: 'subtitle', text: "Suli au len" },
+    { time: 32.5, type: 'subtitle', text: "Le je le fanilé jenti" },
+    
+    // -- Coro suave --
+    { time: 37.0, type: 'subtitle', text: "Méli mélo, méli mélo" },
+    { time: 41.0, type: 'subtitle', text: "Méli mélo, fanilé" },
+    
+    // -- Segunda estrofa --
+    { time: 45.0, type: 'subtitle', text: "Suli au len" },
+    { time: 49.0, type: 'subtitle', text: "Le je le fanilé jenti" },
+    { time: 53.0, type: 'subtitle', text: "Suli au len" },
+    { time: 57.0, type: 'subtitle', text: "Le je le fanilé jenti" },
+    
+    // -- Puente --
+    { time: 61.0, type: 'subtitle', text: "Suli au len..." },
+    { time: 66.0, type: 'subtitle', text: "Méli mélo, fanilé" },
+    
+    // -- Clímax --
+    { time: 72.0, type: 'subtitle', text: "Suli au len, suli au len" },
+    { time: 78.0, type: 'subtitle', text: "Méli mélo, méli mélo" },
+    { time: 84.0, type: 'subtitle', text: "Suli au len..." },
+    { time: 90.0, type: 'subtitle', text: "Le je le fanilé jenti" },
+    
+    // -- Final --
+    { time: 96.0, type: 'subtitle', text: "(Música)" },
+    { time: 105.0, type: 'subtitle', text: "Méli mélo..." },
+    { time: 115.0, type: 'subtitle', text: "Suli au len" },
+    { time: 125.0, type: 'subtitle', text: "(Fin)" }
+  ];
+
+  // Frases de la historia (se insertan en ciertos momentos, reemplazan el panel central)
+  const storyPhrases = [
+    { time: 5.0, text: "Coraline Jones se mudó a una casa antigua y polvorienta." },
+    { time: 15.0, text: "Una noche, mientras llovía, descubrió una pequeña puerta oculta." },
+    { time: 30.0, text: "Al abrirla, un túnel brillante la llevó al Otro Mundo." },
+    { time: 45.0, text: "Allí todo era mágico: jardines de estrellas y comida deliciosa." },
+    { time: 60.0, text: "Pero la Otra Madre tenía botones en lugar de ojos..." },
+    { time: 75.0, text: "\"Quédate aquí para siempre\", susurró, \"solo tienes que coserte estos botones\"." },
+    { time: 90.0, text: "Coraline tembló. Esa perfección era una trampa." },
+    { time: 100.0, text: "Con ayuda de un gato negro, decidió escapar y salvar a sus verdaderos padres." },
+    { time: 115.0, text: "Cerró la puerta y comprendió que el amor real no necesita botones." },
+    { time: 125.0, text: "A veces, lo extraordinario está en lo que ya tenemos. 💫" },
+    // Mensajes para Arly
+    { time: 130.0, text: "Arly, tú eres mi realidad favorita." },
+    { time: 135.0, text: "Gracias por no necesitar botones para brillar. 🖤🗝️" }
+  ];
+
+  // ========== REPRODUCTOR YOUTUBE ==========
+  let player;
+  let lastStory = '';
+  let lastSubtitle = '';
+
+  const storyContainer = document.getElementById('storyText');
+  const subtitleText = document.getElementById('subtitleText');
+  const timeDisplay = document.getElementById('timeDisplay');
+  const playButton = document.getElementById('playButton');
+
+  // Cargar API de YouTube
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+      videoId: YOUTUBE_VIDEO_ID,
+      playerVars: {
+        autoplay: 0,
+        controls: 0,            // Sin controles
+        modestbranding: 1,
+        rel: 0,
+        fs: 0,
+        playsinline: 1,
+        disablekb: 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    playButton.addEventListener('click', () => {
+      if (player.getPlayerState() === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+        playButton.innerHTML = '▶️ Continuar historia';
+      } else {
+        player.playVideo();
+        playButton.innerHTML = '⏸️ Pausar';
+      }
+    });
+  }
+
+  let syncInterval = null;
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      playButton.innerHTML = '⏸️ Pausar';
+      if (syncInterval) clearInterval(syncInterval);
+      syncInterval = setInterval(updateTimeline, 200);
+    } else if (event.data === YT.PlayerState.PAUSED) {
+      playButton.innerHTML = '▶️ Continuar historia';
+      if (syncInterval) clearInterval(syncInterval);
+    } else if (event.data === YT.PlayerState.ENDED) {
+      playButton.innerHTML = '🔄 Volver a empezar';
+      if (syncInterval) clearInterval(syncInterval);
+      storyContainer.textContent = 'Fin de la historia. ¡Te quiero, Arly! 🐈‍⬛';
+      subtitleText.textContent = '🎵';
+    }
+  }
+
+  function updateTimeline() {
+    if (!player || !player.getCurrentTime) return;
+    const currentTime = player.getCurrentTime();
+    timeDisplay.textContent = formatTime(currentTime);
+
+    // Buscar la última entrada de subtítulo
+    let subtitleEntry = null;
+    for (let i = timeline.length - 1; i >= 0; i--) {
+      if (currentTime >= timeline[i].time && timeline[i].type === 'subtitle') {
+        subtitleEntry = timeline[i];
+        break;
+      }
+    }
+    if (subtitleEntry && subtitleEntry.text !== lastSubtitle) {
+      subtitleText.textContent = subtitleEntry.text;
+      lastSubtitle = subtitleEntry.text;
+    }
+
+    // Buscar la última entrada de historia o mensaje
+    let storyEntry = null;
+    for (let i = storyPhrases.length - 1; i >= 0; i--) {
+      if (currentTime >= storyPhrases[i].time) {
+        storyEntry = storyPhrases[i];
+        break;
+      }
+    }
+    if (storyEntry && storyEntry.text !== lastStory) {
+      storyContainer.textContent = storyEntry.text;
+      // Reiniciar animación de fade
+      storyContainer.classList.remove('fade-in');
+      void storyContainer.offsetWidth;
+      storyContainer.classList.add('fade-in');
+      lastStory = storyEntry.text;
+    }
+
+    // Mensaje inicial
+    if (currentTime < 5.0) {
+      storyContainer.textContent = 'Presiona "Abrir la puerta" para entrar al mundo de Coraline...';
+    }
+  }
+
+  function formatTime(seconds) {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins.toString().padStart(2,'0')}:${secs.toString().padStart(2,'0')}`;
+  }
+
+  window.addEventListener('beforeunload', () => {
+    if (syncInterval) clearInterval(syncInterval);
+  });
+</script>
+</body>
+</html>
