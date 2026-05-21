@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover, orientation=portrait">
-  <title>El Portal • Un viaje de Coraline para Arly</title>
+  <title>El Portal • Para Arly con amor</title>
   <style>
     * {
       margin: 0;
@@ -23,7 +23,7 @@
       position: relative;
     }
 
-    /* ========== FONDO Y NIEBLA ========== */
+    /* ========== NIEBLA DE FONDO ========== */
     body::before {
       content: "";
       position: fixed;
@@ -73,7 +73,7 @@
       100% { opacity: 1; transform: scale(1.2); }
     }
 
-    /* Gato negro espectral */
+    /* Gato negro */
     .ghost-cat {
       position: fixed;
       bottom: 15%;
@@ -158,6 +158,45 @@
     .btn7 { left: 90%; animation-delay: 8s; }
     .btn8 { left: 10%; animation-delay: 10s; }
 
+    /* 💖 NUEVA LLUVIA DE CORAZONES Y MENSAJES DE AMOR 💖 */
+    .love-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .love-drop {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      animation: loveFall linear infinite;
+    }
+    @keyframes loveFall {
+      0% { transform: translateY(0) rotate(0deg) scale(0.5); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 0.5; }
+      100% { transform: translateY(110vh) rotate(360deg) scale(1); opacity: 0; }
+    }
+    /* Distribución y colores */
+    .love-drop:nth-child(1) { left: 5%; animation-duration: 7s; animation-delay: 0s; color: #ff6b81; }
+    .love-drop:nth-child(2) { left: 12%; animation-duration: 9s; animation-delay: 1s; color: #ff3366; }
+    .love-drop:nth-child(3) { left: 20%; animation-duration: 8s; animation-delay: 2s; color: #ff6b81; }
+    .love-drop:nth-child(4) { left: 30%; animation-duration: 10s; animation-delay: 0.5s; color: #ff85a1; }
+    .love-drop:nth-child(5) { left: 40%; animation-duration: 7.5s; animation-delay: 1.5s; color: #ff3366; }
+    .love-drop:nth-child(6) { left: 50%; animation-duration: 9.5s; animation-delay: 2.5s; color: #ff6b81; }
+    .love-drop:nth-child(7) { left: 60%; animation-duration: 8.5s; animation-delay: 0.8s; color: #ff85a1; }
+    .love-drop:nth-child(8) { left: 70%; animation-duration: 10.5s; animation-delay: 1.8s; color: #ff3366; }
+    .love-drop:nth-child(9) { left: 80%; animation-duration: 7.8s; animation-delay: 2.2s; color: #ff6b81; }
+    .love-drop:nth-child(10){ left: 90%; animation-duration: 9.2s; animation-delay: 0.3s; color: #ff85a1; }
+    .love-drop:nth-child(11){ left: 15%; animation-duration: 8.3s; animation-delay: 3s; color: #ff6b81; }
+    .love-drop:nth-child(12){ left: 35%; animation-duration: 9.8s; animation-delay: 2s; color: #ff3366; }
+    .love-drop:nth-child(13){ left: 55%; animation-duration: 7.2s; animation-delay: 1.2s; color: #ff6b81; }
+    .love-drop:nth-child(14){ left: 75%; animation-duration: 8.7s; animation-delay: 2.8s; color: #ff85a1; }
+    .love-drop:nth-child(15){ left: 95%; animation-duration: 9.4s; animation-delay: 0.6s; color: #ff3366; }
+
     /* ========== TARJETA PRINCIPAL ========== */
     .storybook {
       background: #1c1b26;
@@ -200,7 +239,7 @@
       gap: 10px;
     }
 
-    /* Panel cuadrado del cómic */
+    /* Panel cuadrado para las imágenes */
     .comic-panel {
       width: 100%;
       aspect-ratio: 1 / 1;
@@ -220,9 +259,6 @@
       position: absolute;
       width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       opacity: 0;
       pointer-events: none;
       transition: opacity 1s ease;
@@ -231,159 +267,13 @@
       opacity: 1;
       pointer-events: auto;
     }
-
-    /* ----- NUEVAS ESCENAS (9 viñetas) ----- */
-
-    /* 1. Coraline en la cama */
-    .scene-cama {
-      background: radial-gradient(circle at 20% 80%, #2a1a1a, #0a0a0a);
-    }
-    .bed {
-      width: 70%;
-      height: 30%;
-      background: #5a3a2a;
-      border-radius: 10px;
-      position: relative;
-      bottom: 10%;
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-    }
-    .bed::before {
-      content: "🛏️";
-      font-size: 4rem;
-      position: absolute;
-      top: -30px;
-    }
-    .coraline-sleep {
-      position: absolute;
-      top: 20%;
-      font-size: 2.5rem;
+    .comic-scene img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;   /* La imagen cubre todo el cuadrado */
     }
 
-    /* 2. Siguiendo al ratón */
-    .scene-raton {
-      background: radial-gradient(circle at 30% 70%, #1a1a2e, #0a0a1a);
-    }
-    .raton {
-      font-size: 2rem;
-      position: absolute;
-      bottom: 30%;
-      left: 20%;
-    }
-    .huellas {
-      font-size: 1rem;
-      position: absolute;
-      bottom: 35%;
-      left: 40%;
-      color: #aaa;
-    }
-
-    /* 3. La puerta pequeña */
-    .scene-puerta-pequena {
-      background: radial-gradient(circle at 40% 50%, #3a2a1a, #0a0a0a);
-    }
-    .small-door {
-      width: 25%;
-      height: 40%;
-      background: #8b5a2b;
-      border: 3px solid #daa520;
-      border-radius: 5px;
-      position: relative;
-      box-shadow: 0 0 15px #e6b422;
-    }
-
-    /* 4. Abre la puerta (se ve el túnel) */
-    .scene-abre-puerta {
-      background: #000;
-    }
-    .door-open {
-      width: 25%;
-      height: 40%;
-      background: transparent;
-      border: 3px dashed #e6b422;
-      border-radius: 5px;
-      position: relative;
-      box-shadow: 0 0 20px #6a0dad;
-    }
-    .door-open::after {
-      content: "";
-      position: absolute;
-      width: 80%;
-      height: 80%;
-      top: 10%;
-      left: 10%;
-      background: radial-gradient(circle, #2e2e5e, #0f0f2a);
-      border-radius: 50%;
-    }
-
-    /* 5. Entrando al túnel (Coraline gateando) */
-    .scene-entrando-tunel {
-      background: #0a0a1a;
-    }
-    .crawling-coraline {
-      font-size: 3rem;
-      position: absolute;
-      bottom: 10%;
-      right: 20%;
-      animation: crawl 2s infinite alternate;
-    }
-    @keyframes crawl {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      100% { transform: translate(-30px, -15px) rotate(-10deg); }
-    }
-
-    /* 6. Dentro del túnel */
-    .scene-dentro-tunel {
-      background: repeating-linear-gradient(45deg, #2e2e5e, #1a1a3a 20px, #3a2a5a 20px, #1a1a3a 40px);
-    }
-
-    /* 7. El Otro Mundo (jardín) */
-    .scene-otro-mundo {
-      background: radial-gradient(circle at 70% 20%, #2e4a2e, #0a1a0a);
-    }
-    .flower {
-      font-size: 3rem;
-      position: absolute;
-    }
-
-    /* 8. La puerta del fondo (en el Otro Mundo) */
-    .scene-puerta-fondo {
-      background: radial-gradient(circle at 50% 40%, #3a2a3a, #1a0a1a);
-    }
-    .ornate-door {
-      width: 35%;
-      height: 50%;
-      background: linear-gradient(180deg, #b8860b, #8b5a2b);
-      border: 3px solid #ffd966;
-      border-radius: 10px;
-      box-shadow: 0 0 20px #ffb347;
-      position: relative;
-    }
-    .ornate-door::after {
-      content: "🚪";
-      font-size: 2.5rem;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-
-    /* 9. Abriendo la puerta final (luz blanca) */
-    .scene-abriendo-final {
-      background: radial-gradient(circle at center, #fff5e6, #1a1a2e);
-    }
-    .final-light {
-      font-size: 5rem;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 0.9; }
-      50% { transform: scale(1.2); opacity: 1; }
-      100% { transform: scale(1); opacity: 0.9; }
-    }
-
-    /* Sorpresa final (Te amo) */
+    /* Sorpresa final (Te amo, Arly) */
     .surprise-message {
       position: absolute;
       width: 100%;
@@ -468,9 +358,13 @@
 </head>
 <body>
 
+<!-- Luna -->
 <div class="moon">🌕</div>
+<!-- Estrellas -->
 <div class="stars" id="starsContainer"></div>
+<!-- Gato -->
 <div class="ghost-cat">🐈‍⬛</div>
+<!-- Llaves -->
 <div class="floating-keys">
   <span class="key">🗝️</span>
   <span class="key">🗝️</span>
@@ -478,6 +372,7 @@
   <span class="key">🗝️</span>
   <span class="key">🗝️</span>
 </div>
+<!-- Botones -->
 <div class="floating-container">
   <span class="floating-button btn1">🔘</span>
   <span class="floating-button btn2">🔘</span>
@@ -489,54 +384,69 @@
   <span class="floating-button btn8">🔘</span>
 </div>
 
+<!-- 💖 Lluvia de corazones y "Arly" 💖 -->
+<div class="love-rain">
+  <span class="love-drop">❤️</span>
+  <span class="love-drop">💕</span>
+  <span class="love-drop">💖</span>
+  <span class="love-drop">💗</span>
+  <span class="love-drop">❤️‍🔥</span>
+  <span class="love-drop">💘</span>
+  <span class="love-drop">💝</span>
+  <span class="love-drop">💟</span>
+  <span class="love-drop">❤️</span>
+  <span class="love-drop">💖</span>
+  <span class="love-drop">💕</span>
+  <span class="love-drop">💗</span>
+  <span class="love-drop">💘</span>
+  <span class="love-drop">💝</span>
+  <span class="love-drop">❤️</span>
+  <!-- Mensajes flotantes "Arly" -->
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366;">Arly</span>
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366; left:10%; animation-duration:11s; animation-delay:0.5s;">Te amo</span>
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366; left:25%; animation-duration:12s; animation-delay:1.2s;">Arly 💖</span>
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366; left:45%; animation-duration:10s; animation-delay:0.8s;">Mi luz</span>
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366; left:65%; animation-duration:13s; animation-delay:2s;">💖 Arly</span>
+  <span class="love-drop" style="font-size:1.5rem; font-weight:bold; font-family:'Courier New'; text-shadow:0 0 10px #ff3366; left:80%; animation-duration:9s; animation-delay:1.5s;">Mi mundo</span>
+</div>
+
+<!-- Libro de historia -->
 <div class="storybook">
   <div class="title">
     <span>🗝️</span> EL PORTAL <span>🪡</span>
   </div>
 
   <div class="comic-panel" id="comicPanel">
-    <!-- 1. Coraline despierta en su cama -->
-    <div class="comic-scene scene-cama active" id="scene1">
-      <div class="coraline-sleep">😴</div>
-      <div class="bed"></div>
+    <!-- Las 9 viñetas con imágenes (reemplaza los src por tus propias URLs) -->
+    <div class="comic-scene active" id="scene1">
+      <img src="https://via.placeholder.com/400x400/1a0f0f/ffffff?text=Coraline+en+la+cama" alt="Coraline en la cama">
     </div>
-    <!-- 2. Sigue al ratón -->
-    <div class="comic-scene scene-raton" id="scene2">
-      <div class="raton">🐭</div>
-      <div class="huellas">👣👣👣</div>
+    <div class="comic-scene" id="scene2">
+      <img src="https://via.placeholder.com/400x400/2a2a4a/ffffff?text=Siguiendo+al+ratón" alt="Siguiendo al ratón">
     </div>
-    <!-- 3. Ve la puerta pequeña -->
-    <div class="comic-scene scene-puerta-pequena" id="scene3">
-      <div class="small-door"></div>
+    <div class="comic-scene" id="scene3">
+      <img src="https://via.placeholder.com/400x400/3a2a1a/ffffff?text=Puerta+pequeña" alt="Puerta pequeña">
     </div>
-    <!-- 4. Abre la puerta, se ve el túnel -->
-    <div class="comic-scene scene-abre-puerta" id="scene4">
-      <div class="door-open"></div>
+    <div class="comic-scene" id="scene4">
+      <img src="https://via.placeholder.com/400x400/0f0f2a/ffffff?text=Abre+la+puerta,+túnel" alt="Abre la puerta al túnel">
     </div>
-    <!-- 5. Entra al túnel -->
-    <div class="comic-scene scene-entrando-tunel" id="scene5">
-      <div class="crawling-coraline">👧🏻</div>
+    <div class="comic-scene" id="scene5">
+      <img src="https://via.placeholder.com/400x400/1a1a3a/ffffff?text=Entrando+al+túnel" alt="Entrando al túnel">
     </div>
-    <!-- 6. Dentro del túnel -->
-    <div class="comic-scene scene-dentro-tunel" id="scene6">
-      <div style="color:white; font-size:2rem;">🌀</div>
+    <div class="comic-scene" id="scene6">
+      <img src="https://via.placeholder.com/400x400/2e2e5e/ffffff?text=Dentro+del+túnel" alt="Dentro del túnel">
     </div>
-    <!-- 7. El Otro Mundo -->
-    <div class="comic-scene scene-otro-mundo" id="scene7">
-      <div class="flower" style="top:10%;left:10%;">🌸</div>
-      <div class="flower" style="top:30%;right:15%;">🌺</div>
-      <div class="flower" style="bottom:20%;left:20%;">🌼</div>
+    <div class="comic-scene" id="scene7">
+      <img src="https://via.placeholder.com/400x400/1a3a1a/ffffff?text=Otro+Mundo" alt="El Otro Mundo">
     </div>
-    <!-- 8. Puerta del fondo en el Otro Mundo -->
-    <div class="comic-scene scene-puerta-fondo" id="scene8">
-      <div class="ornate-door"></div>
+    <div class="comic-scene" id="scene8">
+      <img src="https://via.placeholder.com/400x400/3a2a3a/ffffff?text=Puerta+del+fondo" alt="Puerta del fondo">
     </div>
-    <!-- 9. Abriendo la puerta final (luz) -->
-    <div class="comic-scene scene-abriendo-final" id="scene9">
-      <div class="final-light">✨</div>
+    <div class="comic-scene" id="scene9">
+      <img src="https://via.placeholder.com/400x400/fff5e6/000000?text=Abriendo+la+luz" alt="Abriendo la luz final">
     </div>
 
-    <!-- Sorpresa final -->
+    <!-- Sorpresa final (sin imagen, texto puro) -->
     <div class="surprise-message" id="surpriseMessage">
       <div class="button-heart">🖤🔘🖤</div>
       <div class="surprise-text">Te amo, Arly</div>
@@ -601,17 +511,17 @@
     { time: 120.0, text: "(Fin)" }
   ];
 
-  // Nuevo timeline de escenas (9 viñetas cubriendo ~2 min)
+  // 9 viñetas, ahora usando imágenes
   const sceneChanges = [
-    { time: 0,   sceneId: 'scene1' },   // Cama
-    { time: 8,   sceneId: 'scene2' },   // Ratón
-    { time: 18,  sceneId: 'scene3' },   // Puerta pequeña
-    { time: 30,  sceneId: 'scene4' },   // Abre puerta, túnel
-    { time: 42,  sceneId: 'scene5' },   // Entrando al túnel
-    { time: 56,  sceneId: 'scene6' },   // Dentro del túnel
-    { time: 72,  sceneId: 'scene7' },   // Jardín
-    { time: 88,  sceneId: 'scene8' },   // Puerta del fondo
-    { time: 102, sceneId: 'scene9' }    // Abre puerta final (luz)
+    { time: 0,   sceneId: 'scene1' },
+    { time: 8,   sceneId: 'scene2' },
+    { time: 18,  sceneId: 'scene3' },
+    { time: 30,  sceneId: 'scene4' },
+    { time: 42,  sceneId: 'scene5' },
+    { time: 56,  sceneId: 'scene6' },
+    { time: 72,  sceneId: 'scene7' },
+    { time: 88,  sceneId: 'scene8' },
+    { time: 102, sceneId: 'scene9' }
   ];
 
   let player;
